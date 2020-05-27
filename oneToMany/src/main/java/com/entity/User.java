@@ -1,11 +1,18 @@
 package com.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
-import org.springframework.context.annotation.Configuration;
-
 import java.math.BigInteger;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 /**
@@ -43,8 +50,10 @@ public class User implements Serializable {
 	private String userName;
 
 	//bi-directional many-to-one association to UserIncomeTrack
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = false,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id",insertable = false,updatable = false)
+	   @JsonProperty("collection")
+
 	private UserIncomeTrack userIncomeTrack;
 
 	public User() {

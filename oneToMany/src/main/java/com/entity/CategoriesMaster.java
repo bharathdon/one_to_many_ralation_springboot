@@ -3,6 +3,7 @@ package com.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,6 +13,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 /**
@@ -54,8 +57,10 @@ public class CategoriesMaster implements Serializable {
 	private Date updatedDateTime;
 
 	//bi-directional many-to-one association to UserIncomeTrack
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = false,cascade = CascadeType.ALL)
 	@JoinColumn(name="category_id",insertable = false,updatable = false)
+	   @JsonProperty("collection")
+
 	private UserIncomeTrack userIncomeTrack;
 
 	public CategoriesMaster() {

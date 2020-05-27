@@ -50,14 +50,17 @@ public class UserIncomeTrack implements Serializable {
 
 	//bi-directional many-to-one association to CategoriesMaster
 	@OneToMany(mappedBy="userIncomeTrack")
+//	@JoinColumn(name = "category_id", nullable = false)
 	private List<CategoriesMaster> categoriesMasters;
 
 	//bi-directional many-to-one association to SubCatagoriesMaster
 	@OneToMany(mappedBy="userIncomeTrack")
+//	@JoinColumn(name = "sub_category_id", nullable = false)
 	private List<SubCatagoriesMaster> subCatagoriesMasters;
 
 	//bi-directional many-to-one association to User
 	@OneToMany(mappedBy="userIncomeTrack")
+//	@JoinColumn(name = "user_id", nullable = false)
 	private List<User> users;
 
 	public UserIncomeTrack() {

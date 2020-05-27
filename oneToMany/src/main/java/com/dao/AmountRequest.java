@@ -24,6 +24,7 @@ public class AmountRequest {
 //	private UserRepository userRepository;
 	
 	private UserIncomeTrack userIncomeTrack;
+
 	
 	
 }

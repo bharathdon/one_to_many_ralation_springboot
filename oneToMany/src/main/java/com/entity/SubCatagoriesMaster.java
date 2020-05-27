@@ -1,11 +1,21 @@
 package com.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
-import org.springframework.context.annotation.Configuration;
-
 import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 /**
@@ -50,8 +60,10 @@ public class SubCatagoriesMaster implements Serializable {
 	private Date updatedDateTime;
 
 	//bi-directional many-to-one association to UserIncomeTrack
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = true,fetch = FetchType.LAZY,cascade =CascadeType.ALL )
 	@JoinColumn(name="sub_category_id",insertable = false,updatable = false)
+	   @JsonProperty("collection")
+
 	private UserIncomeTrack userIncomeTrack;
 
 	public SubCatagoriesMaster() {
