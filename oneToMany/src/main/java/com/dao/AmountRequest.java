@@ -1,11 +1,6 @@
 package com.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.entity.User;
 import com.entity.UserIncomeTrack;
-import com.repository.UserRepository;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

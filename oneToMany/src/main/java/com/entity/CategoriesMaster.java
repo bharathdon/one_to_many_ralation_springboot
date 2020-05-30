@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,7 +16,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 /**
@@ -30,6 +35,7 @@ public class CategoriesMaster implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="category_id")
 	private int categoryId;
 
@@ -59,7 +65,8 @@ public class CategoriesMaster implements Serializable {
 	//bi-directional many-to-one association to UserIncomeTrack
 	@ManyToOne(optional = false,cascade = CascadeType.ALL)
 	@JoinColumn(name="category_id",insertable = false,updatable = false)
-	   @JsonProperty("collection")
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+	@NotFound(action = NotFoundAction.IGNORE)
 
 	private UserIncomeTrack userIncomeTrack;
 
@@ -139,8 +146,7 @@ public class CategoriesMaster implements Serializable {
 	}
 
 	public CategoriesMaster(int categoryId, String categoryColor, String categoryName, String createdBy,
-			Date createdDateTime, byte isPublic, String updatedBy, Date updatedDateTime,
-			UserIncomeTrack userIncomeTrack) {
+			Date createdDateTime, byte isPublic, String updatedBy, Date updatedDateTime) {
 		super();
 		this.categoryId = categoryId;
 		this.categoryColor = categoryColor;
@@ -150,15 +156,14 @@ public class CategoriesMaster implements Serializable {
 		this.isPublic = isPublic;
 		this.updatedBy = updatedBy;
 		this.updatedDateTime = updatedDateTime;
-		this.userIncomeTrack = userIncomeTrack;
+//		this.userIncomeTrack = userIncomeTrack;
 	}
 
 	@Override
 	public String toString() {
 		return "CategoriesMaster [categoryId=" + categoryId + ", categoryColor=" + categoryColor + ", categoryName="
 				+ categoryName + ", createdBy=" + createdBy + ", createdDateTime=" + createdDateTime + ", isPublic="
-				+ isPublic + ", updatedBy=" + updatedBy + ", updatedDateTime=" + updatedDateTime + ", userIncomeTrack="
-				+ userIncomeTrack + "]";
+				+ isPublic + ", updatedBy=" + updatedBy + ", updatedDateTime=" + updatedDateTime + "]";
 	}
 	
 	

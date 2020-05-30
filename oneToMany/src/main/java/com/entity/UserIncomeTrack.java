@@ -1,12 +1,20 @@
 package com.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
-import org.springframework.context.annotation.Configuration;
-
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 /**
@@ -21,6 +29,7 @@ public class UserIncomeTrack implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	@Column(name="user_income_id")
 	private int userIncomeId;
 
@@ -50,17 +59,17 @@ public class UserIncomeTrack implements Serializable {
 
 	//bi-directional many-to-one association to CategoriesMaster
 	@OneToMany(mappedBy="userIncomeTrack")
-//	@JoinColumn(name = "category_id", nullable = false)
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private List<CategoriesMaster> categoriesMasters;
 
 	//bi-directional many-to-one association to SubCatagoriesMaster
 	@OneToMany(mappedBy="userIncomeTrack")
-//	@JoinColumn(name = "sub_category_id", nullable = false)
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private List<SubCatagoriesMaster> subCatagoriesMasters;
 
 	//bi-directional many-to-one association to User
 	@OneToMany(mappedBy="userIncomeTrack")
-//	@JoinColumn(name = "user_id", nullable = false)
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private List<User> users;
 
 	public UserIncomeTrack() {

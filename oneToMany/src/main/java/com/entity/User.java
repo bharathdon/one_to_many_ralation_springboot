@@ -7,12 +7,17 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 /**
@@ -26,6 +31,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="user_id")
 	private int userId;
 
@@ -52,7 +58,8 @@ public class User implements Serializable {
 	//bi-directional many-to-one association to UserIncomeTrack
 	@ManyToOne(optional = false,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id",insertable = false,updatable = false)
-	   @JsonProperty("collection")
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+	@NotFound(action = NotFoundAction.IGNORE)
 
 	private UserIncomeTrack userIncomeTrack;
 
@@ -140,7 +147,7 @@ public class User implements Serializable {
 	}
 
 	public User(int userId, String email, String firstName, String lastName, String middleName, BigInteger mobile,
-			String password, String salt, String userName, UserIncomeTrack userIncomeTrack) {
+			String password, String salt, String userName) {
 		super();
 		this.userId = userId;
 		this.email = email;
@@ -151,14 +158,14 @@ public class User implements Serializable {
 		this.password = password;
 		this.salt = salt;
 		this.userName = userName;
-		this.userIncomeTrack = userIncomeTrack;
+//		this.userIncomeTrack = userIncomeTrack;
 	}
 
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", middleName=" + middleName + ", mobile=" + mobile + ", password=" + password + ", salt=" + salt
-				+ ", userName=" + userName + ", userIncomeTrack=" + userIncomeTrack + "]";
+				+ ", userName=" + userName + "]";
 	}
 
 	

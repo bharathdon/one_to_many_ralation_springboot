@@ -20,15 +20,6 @@ import com.repository.UserRepository;
 public class AmountController {
 
 	@Autowired
-	private CategoriesMasterRepository categoriesMasterRepository;
-	
-	@Autowired
-	private SubCategoriesMasterRepository subCategoriesMasterRepository;
-	
-	@Autowired
-	private UserRepository userRepository;
-	
-	@Autowired
 	private UserIncomeTrackRepository userIncomeTrackRepository;
 		
 	
