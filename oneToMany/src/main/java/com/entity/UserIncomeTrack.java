@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
@@ -58,17 +60,17 @@ public class UserIncomeTrack implements Serializable {
 	private int userId1;
 
 	//bi-directional many-to-one association to CategoriesMaster
-	@OneToMany(mappedBy="userIncomeTrack")
+	@OneToMany(mappedBy="userIncomeTrack",cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = CategoriesMaster.class)
 	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private List<CategoriesMaster> categoriesMasters;
 
 	//bi-directional many-to-one association to SubCatagoriesMaster
-	@OneToMany(mappedBy="userIncomeTrack")
+	@OneToMany(mappedBy="userIncomeTrack",cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = SubCatagoriesMaster.class)
 	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private List<SubCatagoriesMaster> subCatagoriesMasters;
 
 	//bi-directional many-to-one association to User
-	@OneToMany(mappedBy="userIncomeTrack")
+	@OneToMany(mappedBy="userIncomeTrack",cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = User.class)
 	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private List<User> users;
 

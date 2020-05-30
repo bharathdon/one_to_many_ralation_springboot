@@ -12,12 +12,6 @@ import lombok.ToString;
 @ToString
 public class AmountRequest {
 
-//	@Autowired
-//	private User user;
-//	
-//	@Autowired
-//	private UserRepository userRepository;
-	
 	private UserIncomeTrack userIncomeTrack;
 
 	

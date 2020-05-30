@@ -63,10 +63,10 @@ public class CategoriesMaster implements Serializable {
 	private Date updatedDateTime;
 
 	//bi-directional many-to-one association to UserIncomeTrack
-	@ManyToOne(optional = false,cascade = CascadeType.ALL)
+	@ManyToOne(optional = false)
 	@JoinColumn(name="category_id",insertable = false,updatable = false)
 	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-	@NotFound(action = NotFoundAction.IGNORE)
+//	@NotFound(action = NotFoundAction.IGNORE)
 
 	private UserIncomeTrack userIncomeTrack;
 

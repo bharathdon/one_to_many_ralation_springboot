@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -27,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -56,11 +59,9 @@ public class User implements Serializable {
 	private String userName;
 
 	//bi-directional many-to-one association to UserIncomeTrack
-	@ManyToOne(optional = false,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@ManyToOne(optional = false )
 	@JoinColumn(name="user_id",insertable = false,updatable = false)
 	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-	@NotFound(action = NotFoundAction.IGNORE)
-
 	private UserIncomeTrack userIncomeTrack;
 
 	public User() {

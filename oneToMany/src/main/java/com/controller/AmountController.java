@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dao.AmountRequest;
 import com.entity.UserIncomeTrack;
-import com.repository.CategoriesMasterRepository;
-import com.repository.SubCategoriesMasterRepository;
 import com.repository.UserIncomeTrackRepository;
-import com.repository.UserRepository;
 
 @RestController
 public class AmountController {
@@ -35,4 +32,7 @@ public class AmountController {
 		return userIncomeTrackRepository.findAll();
 		
 	}
+	
+	
+	
 }

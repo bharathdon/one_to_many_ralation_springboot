@@ -66,10 +66,10 @@ public class SubCatagoriesMaster implements Serializable {
 	private Date updatedDateTime;
 
 	//bi-directional many-to-one association to UserIncomeTrack
-	@ManyToOne(optional = true,fetch = FetchType.LAZY,cascade =CascadeType.ALL )
+	@ManyToOne(optional = false )
 	@JoinColumn(name="sub_category_id",insertable = false,updatable = false)
 	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-	@NotFound(action = NotFoundAction.IGNORE)
+//	@NotFound(action = NotFoundAction.IGNORE)
 
 	private UserIncomeTrack userIncomeTrack;
 
